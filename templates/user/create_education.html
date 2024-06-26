@@ -1,0 +1,70 @@
+{% extends 'user/header.html' %}
+
+{% block content %}
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js" integrity="sha384-Lu0p/xzPpZit3GS/+O0TlT7gj1b6QoCIr2YGvh5YpHEPLvR4jKlWjVO8WaCpVL5h" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Vy/0R1PLz7jsBdj0Dz+6Bh6GjyO0v8e/1Q" crossorigin="anonymous"></script>
+
+<div class="section">
+    <div class="container">
+        <div class="row" style="margin-top: 20px;">
+            <div class="col-md-6">
+                <div class="shiping-details">
+                    <div class="section-title">
+                        <h3 class="title">Education</h3>
+                    </div>
+                    <div class="caption">
+                        <form action="" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="level">Level of Education:</label>
+                                <select class="form-control" id="level" name="level">
+                                    <option value="HighSchool">High School</option>
+                                    <option value="HigherSecondarySchool">Higher Secondary</option>
+                                    <option value="Graduation/Diploma">Graduation/Diploma</option>
+                                    <option value="PostGraduation">Post Graduation</option>
+                                    <option value="PhD">PhD</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="school_or_university">School or University:</label>
+                                <input class="form-control" type="text" id="school_or_university" name="school_or_university" placeholder="Enter School or University">
+                            </div>
+                            <div class="form-group">
+                                <label for="course">Course:</label>
+                                <input class="form-control" type="text" id="course" name="course" placeholder="Enter Course">
+                            </div>
+                            <div class="form-group">
+                                <label for="start_date">Start Date:</label>
+                                <input class="form-control" type="date" id="start_date" name="start_date">
+                            </div>
+                            <div class="form-group">
+                                <label for="end_date">End Date:</label>
+                                <input class="form-control" type="date" id="end_date" name="end_date">
+                            </div>
+                            <div class="form-group">
+                                <label for="additional_details">Additional Details:</label>
+                                <textarea class="form-control" id="additional_details" name="additional_details" rows="3" placeholder="Enter Additional Details"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<style>
+    .input {
+        width: 320px;
+    }
+    .form-control {
+        width: 320px;
+    }
+</style>
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends 'company/company_layout.html'%}
+{% load static %}
+
+{% block content %}
+
+<div class="card">
+    <div style="margin-top:25px;"></div>
+    <div class="card-body">
+        <div class="card-sub"><code class="highlighter-rouge"></code> <code class="highlighter-rouge"></code>
+        </div>
+        <div class="table-responsive">
+            <button class="btn btn-primary btn-round"><a href="{% url 'company_jobadd' %}" style="color:whitesmoke;">Add Vaccancy</a></button>
+            <table class="table table-bordered table-head-bg-info table-bordered-bd-info mt-4">    
+                <thead>
+                    <tr>
+                        <th scope="col">Sl No</th>
+                        <th scope="col">Job Title</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Job Type</th>
+                        <th scope="col">Industry</th>
+                        <th scope="col">Location</th>
+                        <th scope="col">Job Fields</th>
+                        <th scope="col">Salary</th>
+                        <th scope="col">Education</th>
+                        <th scope="col">Experience</th>
+                        <th scope="col">Skills</th>
+                        <th scope="col">Dead Line</th>
+                        <th scope="col">Filled</th>
+                        <th scope="col">No Of Vaccancy</th>
+                        <th scope="col">Created_Date</th>
+                        <th scope="col">Updated_Date</th>
+                        <th scope="col">Edits</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in company_joblist%}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{i.job_title}}</td>
+                        <td>{{i.job_description}}</td>
+                        <td>{{i.job_type}}</td>
+                        <td>{{i.industry}}</td>
+                        <td>{{i.location}}</td>
+                        <td>{{i.job_fields}}</td>
+                        <td>{{i.salary}}</td>
+                        <td>{{i.education_requirements}}</td>
+                        <td>{{i.experience_requirements}}</td>
+                        <td>{{i.skills_and_qualifications}}</td>
+                        <td>{{i.application_deadline}}</td>
+
+                        {% if i.filled == False %}
+                        <td ><a href="{% url 'filled' i.id %}" style="color:rgb(86, 218, 86)"><strong>Not Filled</strong></a></td>
+                    {% else %}
+                    <td>
+                        <a href="{% url 'filled' i.id %}" style="color: red;"><strong>Filled</strong></a>
+                    </td>
+                    
+                    {% endif %}
+                       
+
+
+                        <td>{{i.vacancy}}</td>
+                        <td>{{i.date_posted}}</td>
+                        <td>{{i.updated_date}}</td>
+                        <td><a href="{% url 'company_jobedit' i.id %}" class="btn btn-sm btn-primary">Edit Job</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+    
+{% endblock %}
+

@@ -1,0 +1,237 @@
+{% extends 'user/header.html' %}
+
+{% block content %}
+
+<br>
+<div class="container-fluid">
+    <div class="card ">
+        <div class="card-header" style="background-color:  #29237E; color: white;">
+            <h3 class="card-title">Apply Job</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+            <div class='row'>
+                <div class='col-md-6'>
+                    <div class="post">
+                        <div class="user-block">
+                            <img class="img-circle img-bordered-sm" src="{{job.fk_company_pro.logo.url}}" alt="" style="width:100px;">
+                            <br>
+                            <span class="username">
+                                <b class="uppercase1">{{job.fk_company_pro.company_name}}</b>
+                            </span>
+                        </div>
+                    </div>
+                    <br>
+                    <label>Company Description</label>
+                    <p class="text-muted">{{job.fk_company_pro.description}}</p>
+                    <label>Job Title</label>
+                    <p class="text-muted">{{job.job_title}}</p>
+                    <label>Job Description</label>
+                    <p class="text-muted">{{job.job_description}}</p>
+                    <label>Experience Requirements</label>
+                    <p class="text-muted">{{job.experience_requirements}}</p>
+                    <label>Application Deadline</label>
+                    <p class="text-muted">{{job.application_deadline}}</p>
+                </div>
+
+                <div class='col-md-6'>
+                    <label>Vacancy</label>
+                    <p class="text-muted">{{job.vacancy}}</p>
+                    <label>Job Type</label>
+                    <p class="text-muted">{{job.job_type}}</p>
+                    <label>Industry</label>
+                    <p class="text-muted">{{job.industry}}</p>
+                    <label>Location</label>
+                    <p class="text-muted">{{job.location}}</p>
+                    <label>Job Field</label>
+                    <p class="text-muted">{{job.job_fields}}</p>
+                    <label>Salary</label>
+                    <p class="text-muted">{{job.salary}}</p>
+                    <label>Education Requirement</label>
+                    <p class="text-muted">{{job.education_requirements}}</p>
+                    <label>Skills and Qualifications</label>
+                    <p class="text-muted">{{job.skills_and_qualifications}}</p>
+                    {% if application %}
+                    <label style="color: rgb(57, 212, 0);">Applied</label>
+                {% else %}
+                    <form id="applicationForm" action="" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputFile">Resume</label>
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="exampleInputFile" name="resume" required>
+                                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <button type="submit" class="btn btn-primary">Apply</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                {% endif %}
+                </div>
+                <!-- /.card-body -->
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<div class="container">
+    <input type="checkbox" id="check">
+    <div class="background"></div>
+    <div class="alert_box">
+      <div class="icon">
+        <i class="fas fa-check"></i>
+      </div>
+      <header>Success</header>
+      <p>Your application has been submitted successfully!</p>
+      <div class="btns">
+        <label for="check" id="closeButton">Close</label>
+      </div>
+    </div>
+</div>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+    *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins',sans-serif;
+    }
+    .alert_box,
+    .show_button{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50% , -50%);
+    }
+    .background{
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      top: 0;
+      left: 0;
+      background: rgba(0, 0, 0, 0.5);
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s ease;
+    }
+    .alert_box{
+      padding: 30px;
+      display: flex;
+      background: #fff;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      max-width: 450px;
+      width: 100%;
+      border-radius: 5px;
+      z-index: 5;
+      opacity: 0;
+      pointer-events: none;
+      transform: translate(-50% , -50%) scale(0.97);
+      transition: all 0.3s ease;
+    }
+    #check:checked ~ .alert_box{
+      opacity: 1;
+      pointer-events: auto;
+      transform: translate(-50% , -50%) scale(1);
+    }
+    #check:checked ~ .background{
+      opacity: 1;
+      pointer-events: auto;
+    }
+    #check{
+      display: none;
+    }
+    .alert_box .icon{
+      height: 100px;
+      width: 100px;
+      color: #28a745;
+      border: 3px solid #28a745;
+      border-radius: 50%;
+      line-height: 97px;
+      font-size: 50px;
+    }
+    .alert_box header{
+      font-size: 35px;
+      font-weight: 500;
+      margin: 10px 0;
+    }
+    .alert_box p{
+      font-size: 20px;
+    }
+    .alert_box .btns{
+      margin-top: 20px;
+    }
+    .btns label{
+      display: inline-flex;
+      height: 55px;
+      padding: 0 30px;
+      font-size: 20px;
+      font-weight: 400;
+      cursor: pointer;
+      line-height: 55px;
+      outline: none;
+      margin: 0 10px;
+      border: none;
+      color: #fff;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+    }
+    .btns label:first-child{
+      background: #28a745;
+    }
+    .btns label:first-child:hover{
+      background: #218838;
+    }
+  </style>
+<script>
+document.getElementById('applicationForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent default form submission
+    
+    // Collect the form data
+    const formData = new FormData(event.target);
+    
+    // Send the form data via AJAX
+    fetch(event.target.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+        }
+    })
+    .then(response => {
+        if (response.ok) {
+            // Show the custom alert box
+            document.getElementById('check').checked = true;
+        } else {
+            // Handle error
+            alert('There was an error submitting your application.');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('There was an error submitting your application.');
+    });
+});
+
+document.getElementById('closeButton').addEventListener('click', function() {
+    // Redirect to the job list page
+    window.location.href = "{% url 'job_list' %}";
+});
+</script>
+<script>
+    // Update custom file input label
+    document.getElementById('exampleInputFile').addEventListener('change', function() {
+        var fileName = this.value.split('\\').pop();
+        var label = document.querySelector('.custom-file-label');
+        label.textContent = fileName !== '' ? fileName : 'Choose file';
+    });
+</script>
+
+{% endblock %}

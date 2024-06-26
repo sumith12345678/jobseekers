@@ -1,0 +1,72 @@
+{% extends 'user/header.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+  font-family: Arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+th, td {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* Hide the overflow of the table on small screens */
+@media only screen and (max-width: 600px) {
+  table {
+    overflow-x: auto;
+    display: block;
+  }
+  th, td {
+    white-space: nowrap; /* Prevent wrapping of table cells */
+  }
+}
+</style>
+</head>
+<body>
+
+<h2>Project List</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Sl No</th>
+      <th>Project Name</th>
+      <th>Project Description</th>
+      <th>Project Url</th>
+      <th>Edit</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for project in user_projects %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>{{ project.project_name }}</td>
+      <td>{{ project.project_description }}</td>
+      <td>{{ project.project_link }}</td>
+      <td><a href="{% url 'edit_project' project.id %}"><i class="fas fa-edit"></i></a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+</body>
+</html>
+
+{% endblock %}

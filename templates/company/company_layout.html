@@ -1,0 +1,188 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<title>Ready Bootstrap Dashboard</title>
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+	<link rel="stylesheet" href="{% static 'company/assets/css/bootstrap.min.css' %}">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+	<link rel="stylesheet" href="{% static 'company/assets/css/ready.css' %}">
+	<link rel="stylesheet" href="{% static 'company/assets/css/demo.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+  
+</head>
+
+
+
+<body>
+	<div class="wrapper">
+		<div class="main-header">
+			<div class="logo-header">
+				<a href="#" class="logo">
+					<b>JOB SEEKERS</b>
+				</a>
+				<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<button class="topbar-toggler more"><i class="la la-ellipsis-v"></i></button>
+			</div>
+			<nav class="navbar navbar-header navbar-expand-lg">
+				<div class="container-fluid">
+					<ul class="navbar-nav topbar-nav ml-md-auto align-items-center">          
+          <li class="nav-item dropdown hidden-caret">
+            <a class="nav-link dropdown-toggle" href="{% url 'logoutall' %}">
+                <i class="fa fa-power-off"></i>
+            </a>
+        </li>
+						</ul>
+					</div>
+				</nav>
+			</div>
+			<div class="sidebar">
+				<div class="scrollbar-inner sidebar-wrapper">
+                    
+
+					<div class="user">
+                        {% if company %}
+						<div class="photo">
+							<img src="{{company.logo.url}}">
+						</div>
+                        {% else %}
+                        <div class="photo">
+							<img src="{% static 'company/assets/img/profile.jpg' %}">
+						</div>
+                        {% endif %}
+						<div class="info">
+							<a class="" data-toggle="collapse" href="#collapseExample" aria-expanded="true">
+								<span>
+									{{company.company_name}}
+									<span class="user-level">Administrator</span>
+									<span class="caret"></span>
+								</span>
+							</a>
+							<div class="clearfix"></div>   
+                      
+							<div class="collapse in" id="collapseExample" aria-expanded="true" >
+								<ul class="nav">
+									<li>
+										<a href="{% url 'company_profile' %}">
+											<span class="link-collapse">My Profile</span>
+										</a>
+									</li>
+
+                                    {% if company_profile %}
+                                    {% for i in company_profile %}
+									<li>
+										<a href="{% url 'company_profile_edit' i.id %}">
+											<span class="link-collapse">Edit Profile</span>
+										</a>
+									</li>
+                                    {% endfor %}
+                                    {% else %}
+                                    <p style="color:red;">No profile found.</p>
+                                    {% endif %}
+								</ul>
+							</div>
+						</div>
+					</div>  
+             
+					<ul class="nav">
+						<li class="nav-item active">
+							<a href="{% url 'company_home' %}">
+								<i class="la la-dashboard"></i>
+								<p>Dashboard</p>
+								<span class="badge badge-count">5</span>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="{% url 'company_job' %}">
+								<i class="la la-table"></i>
+								<p>Job Vaccancies</p>
+								<span class="badge badge-count">14</span>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="{% url 'job_applicants' %}">
+								<i class="la la-keyboard-o"></i>
+								<p>Applicants</p>
+								<span class="badge badge-count">50</span>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="tables.html">
+								<i class="la la-th"></i>
+								<p>Tables</p>
+								<span class="badge badge-count">6</span>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="notifications.html">
+								<i class="la la-bell"></i>
+								<p>Notifications</p>
+								<span class="badge badge-success">3</span>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="typography.html">
+								<i class="la la-font"></i>
+								<p>Typography</p>
+								<span class="badge badge-danger">25</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="main-panel">
+                {% block content %}
+                {% endblock %}
+            </div>
+
+
+
+        
+				<footer class="footer">
+					<div class="container-fluid">
+						<div class="copyright ml-auto">
+							2024, made with <i class="la la-heart heart text-danger"></i> by <a href="http://www.themekita.com">Sumith KM</a>
+						</div>				
+					</div>
+				</footer>
+			</div>
+		</div>
+	</div>
+	<!-- Modal -->
+	<div class="modal fade" id="modalUpdate" tabindex="-1" role="dialog" aria-labelledby="modalUpdatePro" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header bg-primary">
+					<h6 class="modal-title"><i class="la la-frown-o"></i> Under Development</h6>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script src="{% static 'company/assets/js/core/jquery.3.2.1.min.js' %}"></script>
+<script src="{% static 'company/assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js' %}"></script>
+<script src="{% static 'company/assets/js/core/popper.min.js' %}"></script>
+<script src="{% static 'company/assets/js/core/bootstrap.min.js' %}"></script>
+<script src="{% static 'company/assets/js/plugin/chartist/chartist.min.js' %}"></script>
+<script src="{% static 'company/assets/js/plugin/chartist/plugin/chartist-plugin-tooltip.min.js' %}"></script>
+<script src="{% static 'company/assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js' %}"></script>
+<script src="{% static 'company/assets/js/plugin/bootstrap-toggle/bootstrap-toggle.min.js' %}"></script>
+<script src="{% static 'company/assets/js/plugin/jquery-mapael/jquery.mapael.min.js' %}"></script>
+<script src="{% static 'company/assets/js/plugin/jquery-mapael/maps/world_countries.min.js' %}"></script>
+<script src="{% static 'company/assets/js/plugin/chart-circle/circles.min.js' %}"></script>
+<script src="{% static 'company/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js' %}"></script>
+<script src="{% static 'company/assets/js/ready.min.js' %}"></script>
+<script src="{% static 'company/assets/js/demo.js' %}"></script>
+
+</html>

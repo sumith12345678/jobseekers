@@ -1,0 +1,50 @@
+{% extends 'user/header.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h2>Edit Experience Details</h2>
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="current_company_name">Company Name:</label>
+                    <input type="text" class="form-control" id="current_company_name" name="current_company_name" value="{{ experience.current_company_name }}">
+                </div>
+                <div class="form-group">
+                    <label for="location">Location:</label>
+                    <input type="text" class="form-control" id="location" name="location" value="{{ experience.location }}">
+                </div>
+                <div class="form-group">
+                    <label for="doj">Date of Joining:</label>
+                    <input type="date" class="form-control" id="doj" name="doj" value="{{ experience.doj|date:"Y-m-d" }}">
+                </div>
+                <div class="form-group">
+                    <label for="current_salary">Current Salary:</label>
+                    <input type="number" class="form-control" id="current_salary" name="current_salary" value="{{ experience.current_salary }}">
+                </div>
+                <div class="form-group">
+                    <label for="job_profile">Job Profile:</label>
+                    <textarea class="form-control" id="job_profile" name="job_profile" rows="3">{{ experience.job_profile }}</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="notice_period">Notice Period:</label>
+                    <select class="form-control" id="notice_period" name="notice_period">
+                        {% for choice in experience.PERIOD %}
+                            <option value="{{ choice.0 }}" {% if choice.0 == experience.notice_period %} selected {% endif %}>{{ choice.1 }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="dol">Date of Leaving:</label>
+                    <input type="date" class="form-control" id="dol" name="dol" value="{{ experience.dol|date:"Y-m-d" }}">
+                </div>
+                <button type="submit" class="btn btn-primary">Update</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

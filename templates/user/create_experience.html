@@ -1,0 +1,78 @@
+{% extends 'user/header.html' %}
+{% block content %}
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js" integrity="sha384-Lu0p/xzPpZit3GS/+O0TlT7gj1b6QoCIr2YGvh5YpHEPLvR4jKlWjVO8WaCpVL5h" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Vy/0R1PLz7jsBdj0Dz+6Bh6GjyO0v8e/1Q" crossorigin="anonymous"></script>
+
+<div class="section">
+    <div class="container">
+        <div class="row" style="margin-top: 20px;">
+            <div class="col-md-6">
+                <div class="shiping-details">
+                    <div class="section-title">
+                        <h3 class="title">Experience Details</h3>
+                    </div>
+                    <div class="caption">
+                        <form action="" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="is_this_current_emp">Is this your current employment ?</label>
+                                <input class="form-check-input" type="checkbox" id="is_this_current_emp" name="is_this_current_emp">
+                            </div>
+                            <div class="form-group">
+                                <label for="current_company_name">Current Company Name:</label>
+                                <input class="form-control" type="text" id="current_company_name" name="current_company_name" placeholder="Enter Current Company Name">
+                            </div>
+                            <div class="form-group">
+                                <label for="location">Location:</label>
+                                <input class="form-control" type="text" id="location" name="location" placeholder="Enter Location">
+                            </div>
+                            <div class="form-group">
+                                <label for="doj">Date of Joining:</label>
+                                <input class="form-control" type="date" id="doj" name="doj">
+                            </div>
+                            <div class="form-group">
+                                <label for="current_salary">Current Salary:</label>
+                                <input class="form-control" type="number" id="current_salary" name="current_salary" placeholder="Enter Current Salary">
+                            </div>
+                            <div class="form-group">
+                                <label for="job_profile">Job Profile:</label>
+                                <textarea class="form-control" id="job_profile" name="job_profile" rows="3" placeholder="Enter Job Profile"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="notice_period">Notice Period:</label>
+                                <select class="form-control" id="notice_period" name="notice_period">
+                                    <option value="15_Days_and_less">15 Days and Less</option>
+                                    <option value="1Month">1 Month</option>
+                                    <option value="2Month">2 Months</option>
+                                    <option value="3Month">3 Months</option>
+                                    <option value="MoreThan3Month">More Than 3 Months</option>
+                                    <option value="ServingNoticePeriod">Serving Notice Period</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="dol">Date of Leaving:</label>
+                                <input class="form-control" type="date" id="dol" name="dol">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<style>
+    .input {
+        width: 320px;
+    }
+    .form-control {
+        width: 320px;
+    }
+</style>
+{% endblock %}

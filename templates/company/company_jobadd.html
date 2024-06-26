@@ -1,0 +1,83 @@
+{% extends 'company/company_layout.html'%}
+{% load static %}
+
+{% block content %}
+
+<div class="content">
+    <div class="container-fluid">
+        <h4 class="page-title">Job Add Form</h4>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Job Details</div>
+                    </div>
+                    <div class="card-body">
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="job_title">Job Title</label>
+                                <input type="text" class="form-control" id="job_title" name="job_title" placeholder="Enter Job Title">
+                            </div>
+                            <div class="form-group">
+                                <label for="job_description">Job Description</label>
+                                <textarea class="form-control" id="job_description" name="job_description" rows="4" placeholder="Enter Job Description"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="job_type">Job Type</label>
+                                <select class="form-control" id="job_type" name="job_type">
+                                    <option value="Full_Time">Full Time</option>
+                                    <option value="Part_time">Part Time</option>
+                                    <option value="Contract">Contract</option>
+                                    <option value="Internship">Internship</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="industry">Industry</label>
+                                <input type="text" class="form-control" id="industry" name="industry" placeholder="Enter Industry">
+                            </div>
+                            <div class="form-group">
+                                <label for="location">Location</label>
+                                <input type="text" class="form-control" id="location" name="location" placeholder="Enter Location">
+                            </div>
+                            <div class="form-group">
+                                <label for="job_fields">Job Fields</label>
+                                <input type="text" class="form-control" id="job_fields" name="job_fields" placeholder="Enter Job Fields">
+                            </div>
+                            <div class="form-group">
+                                <label for="salary">Salary</label>
+                                <input type="number" class="form-control" id="salary" name="salary" placeholder="Enter Salary" step="0.01">
+                            </div>
+                            <div class="form-group">
+                                <label for="education_requirements">Education Requirements</label>
+                                <input type="text" class="form-control" id="education_requirements" name="education_requirements" placeholder="Enter Education Requirements">
+                            </div>
+                            <div class="form-group">
+                                <label for="experience_requirements">Experience Requirements</label>
+                                <input type="text" class="form-control" id="experience_requirements" name="experience_requirements" placeholder="Enter Experience Requirements">
+                            </div>
+                            <div class="form-group">
+                                <label for="skills_and_qualifications">Skills and Qualifications</label>
+                                <textarea class="form-control" id="skills_and_qualifications" name="skills_and_qualifications" rows="4" placeholder="Enter Skills and Qualifications"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="application_deadline">Application Deadline</label>
+                                <input type="datetime-local" class="form-control" id="application_deadline" name="application_deadline">
+                            </div>
+                            <div class="form-group">
+                                <label for="vacancy">Vacancy</label>
+                                <input type="number" class="form-control" id="vacancy" name="vacancy" placeholder="Enter Number of Vacancies">
+                            </div>
+                            <div class="card-action">
+                                <button type="submit" class="btn btn-success">Submit</button>
+                                <button type="reset" class="btn btn-danger">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

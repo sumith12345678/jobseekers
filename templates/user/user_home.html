@@ -1,0 +1,335 @@
+{% extends 'user/header.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<section class="job_section layout_padding-bottom" style="background-color: rgb(255, 255, 255);padding-top:30px;">
+    <div class="container">
+      <div class="heading_container">
+        {% for i in user_profile %}
+        <h2>
+            <div>
+                <img src="{{ i.photo.url }}" 
+                     style="width: 85px; height: 85px; border-radius: 50%; object-fit: cover;" />
+            </div>
+            <span style="font-size:25px;color: black;">{{i.firstname}} {{i.lastname}}</span>
+           <br>
+           
+           <span style="font-size:20px;color: black;">
+            {{i.fk_user.email}}
+          </span>
+           <br>
+          <span style="font-size:18px;color: black;">
+            {{i.jobrole}}
+          </span>
+        </h2>
+        {% endfor %}
+<!-- 
+        {% for i in user_career %}
+        <span style="font-size: 25px;">{{i.career_obj}}<br>
+            {% endfor %} -->
+      </div>
+      <div class="handler_btn-box" id="myTab" role="tablist">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" href="{% url 'user_profile' %}">  
+                Profile</a>
+          </li>
+          <li class="nav-item"></li>
+        {% if user_profile %}
+        {% for i in user_profile %}
+       
+            <a class="nav-link active" href="{% url 'edit_profile' i.id %}">
+                Edit Profile
+            </a>
+        {% endfor %}
+        {% else %}
+        <p>No profile found.</p>
+        {% endif %}
+
+    </li>
+          
+        </ul>   
+      </div>
+      <div class="tab-content" id="myTabContent">
+        <div class="job_board tab-pane fade show active" id="jb-1" role="tabpanel" aria-labelledby="jb-1-tab">
+          <div class="content-box">
+            <div class="content layout_padding2-top">
+              <div class="box" style="height:200px;">
+                <h4 style="color:white;">
+                   Carrer Objective 
+                   {% for i in user_career %}
+                   <a href="{% url 'edit_careerobj' i.id %}" style="font-size: 13px;"><i class="fa-solid fa-eye"></i></a>
+                   {% endfor %}
+                  </h4>
+                {% for i in user_career %}
+                <p style="color:white;margin-top: 20px; margin-bottom: 5px;"> 
+                  {{i.career_obj|striptags|truncatewords:7 }}
+                </p>
+                {% endfor %}
+              </div>
+
+               
+                <div class="box" style="height:200px;"> 
+                  <a href="{% url 'applicant_projects' %}" style="font-size: 13px;margin-left: 0p;"><i class="fa fa-plus"></i></a>
+                  <h4 style="color:white;">
+                    Projects 
+                   
+                    <a href="{% url 'applicant_projects_list' %}" style="font-size: 13px;"><i class="fas fa-eye"></i></a>
+                 
+                  </h4>
+                    {% for i in user_proj|slice:":2" %}
+                      <p style="color: white; margin-top: 20px; margin-bottom: 5px;">
+                        {{ i.project_name|striptags|truncatewords:10 }}
+                      </p>
+                    {% endfor %}
+                    
+                </div>
+
+
+                <div class="box" style="height:200px;"> 
+                  <a href="{% url 'applicant_keyskills' %}" style="font-size: 13px;margin-left: 0p;"><i class="fa fa-plus"></i></a>
+                  <h4 style="color:white;">
+                    Skills 
+                   
+                    <a href="{% url 'applicant_skills_list' %}" style="font-size: 13px;"><i class="fas fa-eye"></i></a>
+                 
+                  </h4>
+                    {% for i in user_skills|slice:":2" %}
+                      <p style="color: white; margin-top: 20px; margin-bottom: 5px;"> 
+                        {{ i.key_skills|striptags|truncatewords:10 }}
+                      </p>
+                    {% endfor %}
+                    
+                </div>
+
+
+                <div class="box" style="height:200px;"> 
+                  <a href="{% url 'create_education' %}" style="font-size: 13px;margin-left: 0p;"><i class="fa fa-plus"></i></a>
+                  <h4 style="color:white;">
+                    Education 
+                   
+                    <a href="{% url 'list_education' %}" style="font-size: 13px;"><i class="fas fa-eye"></i></a>
+                 
+                  </h4>
+                    {% for i in user_education|slice:":2" %}
+                      <p style="color: white; margin-top: 20px; margin-bottom: 5px;"> 
+                        {{ i.school_or_university|striptags|truncatewords:10 }}
+                      </p>
+                    {% endfor %}
+                    
+                </div>
+            </div>
+            <div class="btn-box">
+              <a href="">
+                See More
+              </a>
+            </div>
+          </div>
+
+
+
+
+
+
+
+
+
+
+          <div class="content-box">
+            <div class="content layout_padding2-top">
+              <div class="box" style="height:200px;"> 
+                <a href="{% url 'create_experience' %}" style="font-size: 13px;margin-left: 0p;"><i class="fa fa-plus"></i></a>
+                <h4 style="color:white;">
+                  Experience 
+                 
+                  <a href="{% url 'list_experience' %}" style="font-size: 13px;"><i class="fas fa-eye"></i></a>
+               
+                </h4>
+                  {% for i in user_experience|slice:":2" %}
+                    <p style="color: white; margin-top: 20px; margin-bottom: 5px;"> 
+                      {{ i.current_company_name|striptags|truncatewords:10 }}
+                    </p>
+                  {% endfor %}
+                  
+              </div>
+
+
+              <div class="box" style="height:200px;"> 
+                <a href="{% url 'create_languages' %}" style="font-size: 13px;margin-left: 0p;"><i class="fa fa-plus"></i></a>
+                <h4 style="color:white;">
+                  Languages 
+                 
+                  <a href="{% url 'list_languages' %}" style="font-size: 13px;"><i class="fas fa-eye"></i></a>
+               
+                </h4>
+                  {% for i in user_language|slice:":2" %}
+                    <p style="color: white; margin-top: 20px; margin-bottom: 5px;"> 
+                      {{ i.languages|striptags|truncatewords:10 }}
+                    </p>
+                  {% endfor %}
+                  
+              </div>
+          </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- end job section -->
+
+
+  <!-- feature section -->
+
+  <section class="feature_section">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-5 offset-md-1">
+          <div class="detail-box">
+            <h2>
+              Featured job
+            </h2>
+            <p>
+              It is a long established fact that a reader will be distracted by the readable content of a page when
+              looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of
+              letters, as opposed to using Content here, content here', making it look
+            </p>
+            <a href="">
+              Read More
+            </a>
+          </div>
+        </div>
+        <div class="col-md-6 px-0">
+          <div class="img-box">
+            <img src="images/feature-img.jpg" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- end feature section -->
+
+  <!-- people section -->
+
+  <section class="people_section layout_padding">
+    <div class="container">
+      <div class="heading_container">
+        <h2>
+          Some special quotes <br>
+          <span>
+            From Awesome Peoples
+          </span>
+        </h2>
+      </div>
+      <div class="layout_padding2">
+        <div class="people_container c-1">
+          <div class="box">
+            <img src="images/m-1.jpg" alt="">
+          </div>
+          <div class="box">
+            <img src="images/m-2.jpg" alt="">
+          </div>
+        </div>
+        <div class="people_container c-2">
+          <div class="box">
+            <img src="images/m-1.jpg" alt="">
+          </div>
+          <div class="box">
+            <img src="images/m-2.jpg" alt="">
+          </div>
+        </div>
+      </div>
+      <div class="btn-box">
+        <a href="">
+          Read More
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- end people section -->
+
+
+  <!-- client section -->
+
+  <section class="client_section ">
+    <div class="container layout_padding">
+      <div class="heading_container">
+        <h2>
+          Testimonial
+        </h2>
+      </div>
+      <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+        <div class="carousel_btn-container">
+          <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="box">
+              <div class="img-box">
+                <img src="images/client.png" alt="">
+              </div>
+              <div class="detail-box">
+                <h5>
+                  Content Of
+                </h5>
+                <p>
+                  It is a long established fact that a reader will be distracted by the readable content of a page when
+                  looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal
+                  distribution of letters, as opposed to using 'Content here, content here', making it look
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="box">
+              <div class="img-box">
+                <img src="images/client.png" alt="">
+              </div>
+              <div class="detail-box">
+                <h5>
+                  Content Of
+                </h5>
+                <p>
+                  It is a long established fact that a reader will be distracted by the readable content of a page when
+                  looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal
+                  distribution of letters, as opposed to using 'Content here, content here', making it look
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="box">
+              <div class="img-box">
+                <img src="images/client.png" alt="">
+              </div>
+              <div class="detail-box">
+                <h5>
+                  Content Of
+                </h5>
+                <p>
+                  It is a long established fact that a reader will be distracted by the readable content of a page when
+                  looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal
+                  distribution of letters, as opposed to using 'Content here, content here', making it look
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+{% endblock %}

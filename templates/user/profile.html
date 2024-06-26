@@ -1,0 +1,110 @@
+{% extends 'user/header.html' %}
+
+{% block content %}
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js" integrity="sha384-Lu0p/xzPpZit3GS/+O0TlT7gj1b6QoCIr2YGvh5YpHEPLvR4jKlWjVO8WaCpVL5h" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Vy/0R1PLz7jsBdj0Dz+6Bh6GjyO0v8e/1Q" crossorigin="anonymous"></script>
+
+
+<div class="section">
+    <div class="container">
+        <div class="row" style="margin-top:0px;">
+            <div class="col-md-6">
+                <div class="shiping-details">
+                    <div class="section-title">
+                        <h3 class="title">Profile Create</h3>
+                    </div>
+                    <div class="caption">
+                        <form action="" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <input class="input" type="text" name="firstname" placeholder="First Name">
+                            </div>
+                            <div class="form-group">
+                                <input class="input" type="text" name="lastname" placeholder="Last Name">
+                            </div>
+                            <div class="form-group">
+                                <label for="Resume">Image</label>
+                                <input class="file" type="file" name="photo" placeholder="Image">
+                            </div>
+                            <div class="form-group">
+                                <label>Gender</label><br>
+                                <input type="radio" name="gender" value="MALE" checked> Male
+                                <input type="radio" name="gender" value="FEMALE"> Female
+                                <input type="radio" name="gender" value="OTHERS"> Others
+                            </div>
+                            <div class="form-group">
+                                <label>Marital Status</label>
+                                <select class="form-control" name="marital_status">
+                                    <option selected="selected">Select</option>
+                                    <option value="SINGLE">Single</option>
+                                    <option value="MARRIED">Married</option>
+                                    <option value="DIVORCED">Divorced</option>
+                                    <option value="WIDOWED">Widowed</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Date Of Birth</label>
+                                <input class="input" type="date" name="dob" placeholder="Date of Birth">
+                            </div>
+                            
+                           
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="shiping-details">
+                    <div class="section-title">
+                        <h3 class="title"><br></h3>
+                    </div>
+                    <div class="caption">
+                       
+                        <div class="form-group">
+                            <textarea class="input" name="address" placeholder="Address"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="Resume">Resume</label>
+                            <input class="input" type="file" name="resume" placeholder="Resume">
+                        </div>
+                        <div class="form-group">
+                            <textarea class="input" name="career_obj" placeholder="Career Objective"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Work Status</label>
+                            <select class="form-control" name="workstatus">
+                                <option selected="selected">Select</option>
+                                <option value="Experienced">I have work experience</option>
+                                <option value="Fresher">I am a fresher</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input class="input" type="text" name="jobrole" placeholder="Job Role">
+                        </div>
+                        <div class="form-group">
+                            <input class="input" type="tel" name="phone" placeholder="Phone">
+                        </div>
+                 
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <br>
+                <br>
+            </form>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .input{
+        /* background-color: red; */
+        width: 320px;
+    }
+    .form-control{
+        width: 320px;
+    }
+</style>
+{% endblock %}

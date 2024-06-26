@@ -1,0 +1,85 @@
+
+
+
+{% extends 'user/header.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+  font-family: Arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+th, td {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* Hide the overflow of the table on small screens */
+@media only screen and (max-width: 600px) {
+  table {
+    overflow-x: auto;
+    display: block;
+  }
+  th, td {
+    white-space: nowrap; /* Prevent wrapping of table cells */
+  }
+}
+</style>
+</head>
+<body>
+
+<h2>Experience List</h2>
+
+<table>
+  <thead>
+    <tr>
+        <th>Sl No</th>
+        <th>Current Employer</th>
+        <th>Location</th>
+        <th>Date of Joining</th>
+        <th>Current Salary</th>
+        <th>Job Profile</th>
+        <th>Notice Period</th>
+        <th>Date of Leaving</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for experience in list_experience %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>{{ experience.current_company_name }}</td>
+      <td>{{ experience.location }}</td>
+      <td>{{ experience.doj }}</td>
+      <td>{{ experience.current_salary }}</td>
+      <td>{{ experience.job_profile }}</td>
+      <td>{{ experience.notice_period }}</td>
+      <td>{{ experience.dol }}</td>
+      <td><a href="{% url 'edit_experience' experience.id %}"><i class="fas fa-edit"></i></a></td>
+      <td><a href="{% url 'delete_experience' experience.id %}"><i class="fas fa-trash"></i></a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+</body>
+</html>
+
+{% endblock %}

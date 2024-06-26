@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Language</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <style>
+        .form-control {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="my-4">Edit Language</h2>
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="languages">Language:</label>
+                <input class="form-control" type="text" id="languages" name="languages" value="{{ language.languages }}" placeholder="Enter Language">
+            </div>
+            <div class="form-group">
+                <label for="proficiency">Proficiency:</label>
+                <select class="form-control" id="proficiency" name="proficiency">
+                    <option value="BEGINNER" {% if language.proficiency == 'BEGINNER' %} selected {% endif %}>Beginner</option>
+                    <option value="PROFICIENT" {% if language.proficiency == 'PROFICIENT' %} selected {% endif %}>Proficient</option>
+                    <option value="EXPERT" {% if language.proficiency == 'EXPERT' %} selected {% endif %}>Expert</option>
+                </select>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="read" name="read" {% if language.read %} checked {% endif %}>
+                <label class="form-check-label" for="read">Can Read</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="write" name="write" {% if language.write %} checked {% endif %}>
+                <label class="form-check-label" for="write">Can Write</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="speak" name="speak" {% if language.speak %} checked {% endif %}>
+                <label class="form-check-label" for="speak">Can Speak</label>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Submit</button>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js" integrity="sha384-Lu0p/xzPpZit3GS/+O0TlT7gj1b6QoCIr2YGvh5YpHEPLvR4jKlWjVO8WaCpVL5h" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Vy/0R1PLz7jsBdj0Dz+6Bh6GjyO0v8e/1Q" crossorigin="anonymous"></script>
+</body>
+</html>

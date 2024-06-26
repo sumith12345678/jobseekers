@@ -1,0 +1,71 @@
+{% extends 'company/company_layout.html'%}
+{% load static %}
+
+{% block content %}
+
+<div class="card">
+    <div style="margin-top:25px;"></div>
+    <div class="card-body">
+        <div class="card-sub"><code class="highlighter-rouge"></code> <code class="highlighter-rouge"></code>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered table-head-bg-info table-bordered-bd-info mt-4">    
+                <thead>
+                    <tr>
+                        <th scope="col">Sl No</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Phone Number</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Resume</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Submitted Date</th>
+                        <th scope="col">Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in all_appicants%}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{i.fk_user_pro.firstname}}</td>
+                        <td>{{i.fk_user_pro.fk_user.email}}</td>
+                        <td>{{i.fk_user_pro.phone}}</td>
+                        <td>{{i.fk_user_pro.address}}</td>
+                        <td><a href="{{i.resume.url}}"><i class="fa fa-book" aria-hidden="true"></i></a></td>
+                        <td>
+                            <form action="{% url 'change_applicant_status' i.id %}" method="POST">
+                                {% csrf_token %}
+                                <select name="status" onchange="this.form.submit()">
+                                    <option value="Pending" {% if i.status == 'Pending' %} selected {% endif %}>Pending</option>
+                                    <option value="Approved" {% if i.status == 'Approved' %} selected {% endif %}>Approved</option>
+                                    <option value="Rejected" {% if i.status == 'Rejected' %} selected {% endif %}>Rejected</option>
+                                    <!-- Add more status options as needed -->
+                                </select>
+                            </form>
+                        </td>
+                        <td>{{i.created_at}}</td>
+                        <td><a class="delete-link" href="{% url 'job_applicants_delete' i.id %}"><i class="fa fa-trash"></i></a></td>
+
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<!-- JavaScript for confirmation dialog -->
+<script>
+$(document).ready(function() {
+    $('.delete-link').on('click', function(e) {
+        e.preventDefault();
+        var deleteUrl = $(this).attr('href');
+        if (confirm('Are you sure you want to delete this applicant?')) {
+            window.location.href = deleteUrl;  // Proceed with deletion
+        }
+    });
+});
+</script>
+{% endblock %}
+

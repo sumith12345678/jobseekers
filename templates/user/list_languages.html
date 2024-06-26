@@ -1,0 +1,81 @@
+
+
+
+{% extends 'user/header.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+  font-family: Arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+th, td {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* Hide the overflow of the table on small screens */
+@media only screen and (max-width: 600px) {
+  table {
+    overflow-x: auto;
+    display: block;
+  }
+  th, td {
+    white-space: nowrap; /* Prevent wrapping of table cells */
+  }
+}
+</style>
+</head>
+<body>
+
+<h2>Language List</h2>
+
+<table>
+  <thead>
+    <tr>
+        <th>Sl No</th>
+        <th>Language</th>
+        <th>Proficiency</th>
+        <th>Read</th>
+        <th>Write Salary</th>
+        <th>Speak</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for i in list_languages %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>{{ i.languages }}</td>
+      <td>{{ i.proficiency }}</td>
+      <td>{{ i.read }}</td>
+      <td>{{ i.write }}</td>
+      <td>{{ i.speak }}</td>
+      <td><a href="{% url 'edit_languages' i.id %}"><i class="fas fa-edit"></i></a></td>
+      <td><a href="{% url 'delete_languages' i.id %}"><i class="fas fa-trash"></i></a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+</body>
+</html>
+
+{% endblock %}
